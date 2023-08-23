@@ -40,12 +40,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.subscription.add(
     this.itemService.currentListItems$.pipe(
       filter(Boolean),
       tap((value)=> {
           this.listItems$.next(this.listItems$.value.concat(value))
       })
     ).subscribe()
+    )
   }
 
   ngOnDestroy(): void {
